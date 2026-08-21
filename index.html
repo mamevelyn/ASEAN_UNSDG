@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fil">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#315b73" />
+  <title>Sustainability Lab | A-S-E-A-N Learning Journey</title>
+  <style>
+    :root{
+      --navy:#274b61;
+      --blue:#416f87;
+      --teal:#4f8d91;
+      --ink:#29424f;
+      --muted:#647c86;
+      --paper:#f7fafb;
+      --white:#ffffff;
+      --line:#dce8ec;
+      --shadow:0 18px 44px rgba(39,75,97,.10);
+
+      --p1:#e7f3fb;
+      --p1a:#6f9fbd;
+      --p2:#e6f5f1;
+      --p2a:#5e9b8e;
+      --p3:#eeeafa;
+      --p3a:#8479b0;
+      --p4:#e8effb;
+      --p4a:#6f87b6;
+      --p5:#e6f4f6;
+      --p5a:#5f96a0;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(111,159,189,.14), transparent 27rem),
+        radial-gradient(circle at 95% 8%, rgba(132,121,176,.10), transparent 25rem),
+        var(--paper);
+      line-height:1.55;
+    }
+
+    a{color:inherit}
+    .wrap{width:min(1160px, calc(100% - 34px));margin-inline:auto}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      color:white;
+      background:linear-gradient(120deg,#274b61 0%,#3f7084 55%,#548f90 100%);
+      padding:48px 0 34px;
+      border-bottom:5px solid rgba(255,255,255,.42);
+    }
+    .hero::before,.hero::after{
+      content:"";position:absolute;border-radius:999px;pointer-events:none
+    }
+    .hero::before{width:430px;height:430px;right:-200px;top:-255px;background:rgba(255,255,255,.08)}
+    .hero::after{width:250px;height:250px;left:-125px;bottom:-170px;border:42px solid rgba(255,255,255,.07)}
+
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:7px 11px;border:1px solid rgba(255,255,255,.28);border-radius:999px;
+      background:rgba(255,255,255,.07);
+      font-size:.76rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+    }
+    h1{
+      margin:17px 0 8px;
+      font-size:clamp(2.25rem,5vw,4.65rem);
+      line-height:.98;letter-spacing:-.05em;
+      max-width:850px;
+    }
+    .subtitle{
+      margin:0 0 19px;
+      color:#e9f6f7;
+      font-size:clamp(1.05rem,2vw,1.34rem);
+      font-weight:750;
+    }
+    .competency{
+      max-width:930px;margin:0;
+      padding:15px 18px;
+      border-left:4px solid #d7e8ef;
+      background:rgba(255,255,255,.08);
+      border-radius:0 15px 15px 0;
+    }
+    .competency strong{
+      display:block;margin-bottom:3px;
+      color:#d8eef3;
+      font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;
+    }
+
+    .journey{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
+      margin-top:26px;
+    }
+    .step{
+      min-height:102px;padding:12px 13px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:15px;
+      background:rgba(255,255,255,.075);
+      backdrop-filter:blur(2px);
+    }
+    .step b{display:block;font-size:1.65rem;line-height:1;color:#fff;margin-bottom:6px}
+    .step span{display:block;font-size:.8rem;font-weight:850;letter-spacing:.045em;text-transform:uppercase}
+    .step small{display:block;margin-top:5px;color:#dcecef;line-height:1.3}
+
+    main{padding:34px 0 58px}
+    .intro{
+      display:flex;justify-content:space-between;align-items:end;gap:24px;
+      margin:6px 0 18px;
+    }
+    .intro h2{
+      margin:0;color:var(--navy);
+      font-size:clamp(1.75rem,3vw,2.45rem);letter-spacing:-.04em;
+    }
+    .intro p{max-width:620px;margin:0;color:var(--muted)}
+
+    .lab-shell{
+      background:rgba(255,255,255,.88);
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .activity-grid{
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:16px;
+    }
+    .activity{
+      --card:#eef5f7;
+      --accent:#6f9fbd;
+      position:relative;
+      display:flex;flex-direction:column;
+      min-height:235px;
+      padding:20px;
+      border:1px solid rgba(74,111,128,.13);
+      border-radius:22px;
+      background:var(--card);
+      box-shadow:0 8px 22px rgba(39,75,97,.06);
+      overflow:hidden;
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .activity::after{
+      content:"";
+      position:absolute;width:110px;height:110px;border-radius:50%;
+      right:-48px;bottom:-50px;
+      background:color-mix(in srgb, var(--accent) 18%, transparent);
+      pointer-events:none;
+    }
+    .activity:hover{transform:translateY(-4px);box-shadow:0 15px 32px rgba(39,75,97,.11)}
+    .activity:nth-child(1){--card:var(--p1);--accent:var(--p1a)}
+    .activity:nth-child(2){--card:var(--p2);--accent:var(--p2a)}
+    .activity:nth-child(3){--card:var(--p3);--accent:var(--p3a)}
+    .activity:nth-child(4){--card:var(--p4);--accent:var(--p4a)}
+    .activity:nth-child(5){--card:var(--p5);--accent:var(--p5a)}
+
+    .activity:nth-child(1),
+    .activity:nth-child(2),
+    .activity:nth-child(3){grid-column:span 2}
+    .activity:nth-child(4){grid-column:2 / span 2}
+    .activity:nth-child(5){grid-column:4 / span 2}
+
+    .phase{
+      width:42px;height:42px;
+      display:grid;place-items:center;
+      border-radius:13px;
+      background:var(--accent);color:white;
+      font-size:1.25rem;font-weight:900;
+      box-shadow:0 7px 16px rgba(39,75,97,.10);
+    }
+    .kicker{
+      margin:14px 0 7px;
+      color:var(--accent);
+      font-size:.73rem;font-weight:900;letter-spacing:.085em;text-transform:uppercase;
+    }
+    .activity h3{
+      margin:0 0 9px;
+      color:var(--navy);
+      font-size:1.15rem;line-height:1.22;
+    }
+    .activity p{margin:0;color:#536f7b;font-size:.9rem;line-height:1.48}
+    .action{
+      margin-top:auto;padding-top:18px;
+      display:flex;align-items:center;gap:8px;
+      color:var(--accent);font-weight:850;font-size:.87rem;
+    }
+    .action .arrow{
+      width:27px;height:27px;border-radius:50%;
+      display:grid;place-items:center;background:rgba(255,255,255,.52);
+      font-size:1rem;
+    }
+
+    .footer{
+      margin:29px 0 0;text-align:center;color:#71858e;font-size:.86rem
+    }
+    .footer strong{color:var(--navy)}
+
+    @media (max-width:900px){
+      .journey{grid-template-columns:repeat(2,1fr)}
+      .activity-grid{grid-template-columns:repeat(2,1fr)}
+      .activity:nth-child(n){grid-column:auto}
+    }
+    @media (max-width:640px){
+      .wrap{width:min(100% - 20px,1160px)}
+      .hero{padding-top:34px}
+      .journey,.activity-grid{grid-template-columns:1fr}
+      .intro{display:block}
+      .intro p{margin-top:7px}
+      .lab-shell{padding:14px;border-radius:20px}
+      .activity{min-height:210px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Araling Panlipunan 7 · Ikatlong Termino · Ikasiyam na Linggo</div>
+      <h1>Sustainability Lab</h1>
+      <p class="subtitle">A-S-E-A-N: Mula Adhikain, Tungo sa Aksiyon</p>
+
+      <p class="competency">
+        <strong>Learning Competency</strong>
+        Nasusuri ang mga hamon at tugon ng ASEAN sa pagtamo ng likas-kayang pag-unlad (sustainable development).
+      </p>
+
+      <div class="journey" aria-label="A-S-E-A-N learning journey">
+        <div class="step"><b>A</b><span>Adhikain</span><small>Ano ang nais makamit?</small></div>
+        <div class="step"><b>S</b><span>Sagot</span><small>Paano tumutugon ang ASEAN?</small></div>
+        <div class="step"><b>E</b><span>Ebidensiya</span><small>Ano ang ipinakikita ng ebidensiya?</small></div>
+        <div class="step"><b>A</b><span>Angkop</span><small>Angkop ba sa ibang konteksto?</small></div>
+        <div class="step"><b>N</b><span>Nagmumungkahi</span><small>Ano ang maimumungkahi natin?</small></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="intro">
+      <div><h2>Interactive Missions</h2></div>
+      <p>Limang gawain. Limang lente ng pagsusuri. Sundan ang A-S-E-A-N flow mula pagkilala ng adhikain hanggang pagbuo ng mungkahing may batayan.</p>
+    </div>
+
+    <section class="lab-shell" aria-label="Interactive activities">
+      <div class="activity-grid">
+        <a class="activity" href="UN SDG.html" aria-label="Buksan ang SDG Signal interactive">
+          <span class="phase">A</span>
+          <span class="kicker">Adhikain · Decode the Goals</span>
+          <h3>SDG SIGNAL: ANONG GOAL ITO?</h3>
+          <p>Kilalanin ang 17 Sustainable Development Goals at buuin ang pundasyon ng sustainability journey.</p>
+          <span class="action"><span class="arrow">→</span> Buksan ang activity</span>
+        </a>
+
+        <article class="activity">
+          <span class="phase">S</span>
+          <span class="kicker">Sagot · Match the Response</span>
+          <h3>HAMON ↔ TUGON</h3>
+          <p>Basahin ang hamong panrehiyon at tukuyin kung aling mekanismo o programa ang pinakaangkop na tugon.</p>
+          <span class="action"><span class="arrow">↔</span> Hanapin ang tugma</span>
+        </article>
+
+        <article class="activity">
+          <span class="phase">E</span>
+          <span class="kicker">Ebidensiya · Investigate the Case</span>
+          <h3>CASE FILE: EBIDENSIYA BAGO HATOL</h3>
+          <p>Siyasatin ang hamon, hakbang, SDG, ebidensiya, antas ng pagkilos, at limitasyon bago bumuo ng pasya.</p>
+          <span class="action"><span class="arrow">⌕</span> Suriin ang case</span>
+        </article>
+
+        <article class="activity">
+          <span class="phase">A</span>
+          <span class="kicker">Angkop · Decide with Evidence</span>
+          <h3>ANGKOP CHECK: ADOPT • ADAPT • NOT YET?</h3>
+          <p>Timbangin ang ebidensiya, konteksto, kakayahan, at limitasyon bago pumili ng pinakamakatuwirang pasya.</p>
+          <span class="action"><span class="arrow">✓</span> Bumuo ng hatol</span>
+        </article>
+
+        <article class="activity">
+          <span class="phase">N</span>
+          <span class="kicker">Nagmumungkahi · Turn Evidence into Action</span>
+          <h3>IDEYA → AKSIYON: MAY BATAYAN BA?</h3>
+          <p>Gamitin ang natutuhan sa rehiyon upang bumuo, suriin, at pahusayin ang isang evidence-informed na mungkahi.</p>
+          <span class="action"><span class="arrow">✦</span> Iangat ang mungkahi</span>
+        </article>
+      </div>
+    </section>
+
+    <p class="footer"><strong>Adhikain → Sagot → Ebidensiya → Angkop → Nagmumungkahi</strong><br />Mula pag-unawa tungo sa responsableng pagkilos.</p>
+  </main>
+</body>
+</html>
