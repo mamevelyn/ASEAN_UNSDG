@@ -1,0 +1,42 @@
+{
+  "id": "/ASEAN_UNSDG/",
+  "name": "ASEAN Sustainability Lab",
+  "short_name": "ASEAN SDG",
+  "description": "Araling Panlipunan 7 interactive learning app on ASEAN and the UN Sustainable Development Goals.",
+  "lang": "fil",
+  "start_url": "/ASEAN_UNSDG/",
+  "scope": "/ASEAN_UNSDG/",
+  "display": "standalone",
+  "background_color": "#f7fafb",
+  "theme_color": "#315b73",
+  "orientation": "any",
+  "categories": [
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
