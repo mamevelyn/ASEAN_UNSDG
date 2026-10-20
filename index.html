@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ASEAN at Likas-Kayang Pag-unlad</title>
+<meta name="build" content="v8-responsive">
 <style>
 :root{
   --bg1:#0b2038; --bg2:#143f5e; --card:#ffffff; --text:#142033; --muted:#63738a;
@@ -12,9 +13,9 @@
   --shadow:0 14px 40px rgba(7,24,45,.16);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
 body{
-  margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
+  margin:0; max-width:100%; overflow-x:hidden; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
   background:
     radial-gradient(circle at top left, rgba(240,180,41,.18), transparent 24%),
     radial-gradient(circle at top right, rgba(179,38,30,.18), transparent 26%),
@@ -98,14 +99,14 @@ body{
 .step-a2 .badge{background:#d97822}
 .step-n .badge{background:#13836e}
 .badge{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.28rem;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
-.main{max-width:1320px;margin:-16px auto 0;padding:0 20px 30px}
-.panel{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:22px;margin-bottom:22px}
+.main{width:100%;max-width:1320px;margin:-16px auto 0;padding:0 20px 30px;min-width:0}
+.panel{width:100%;min-width:0;background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:22px;margin-bottom:22px}
 .section-title{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:18px}
 .section-title h2{margin:0;font-size:1.35rem;color:#16324a}
 .section-title p{margin:6px 0 0;color:var(--muted)}
-.session-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
-.session-card{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);display:grid;grid-template-columns:minmax(150px,190px) 1fr;min-height:100%}
-.session-head{padding:18px 16px;color:#fff;position:relative;background:linear-gradient(135deg,#8f1917,#c33228 58%,#f0b429);display:flex;align-items:flex-start}
+.session-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch;width:100%;min-width:0}
+.session-card{width:100%;min-width:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);display:grid;grid-template-columns:minmax(150px,190px) 1fr;min-height:100%}
+.session-head{min-width:0;padding:18px 16px;color:#fff;position:relative;background:linear-gradient(135deg,#8f1917,#c33228 58%,#f0b429);display:flex;align-items:flex-start}
 .session-card[data-letter="S"] .session-head{background:linear-gradient(135deg,#0f4d67,#1fa7a8 58%,#9fe3da)}
 .session-card[data-letter="E"] .session-head{background:linear-gradient(135deg,#50308c,#7c3aed 58%,#c5b3ff)}
 .session-card[data-letter="N"] .session-head{background:linear-gradient(135deg,#004f48,#108775 58%,#7ce3b8)}
@@ -114,10 +115,10 @@ body{
 .day-letter{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.22);font-size:.92rem;font-weight:900;color:#fff;flex:0 0 30px}
 .session-head h3{margin:0 0 4px;font-size:1.08rem;line-height:1.3}
 .session-head .micro{margin:0;font-size:.93rem;opacity:.96}
-.session-body{padding:17px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.topic{font-size:1rem;line-height:1.48;font-weight:800;color:#18334f;margin-bottom:2px}
-.tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:3px}
-.btn{appearance:none;border:none;cursor:pointer;border-radius:14px;padding:11px 12px;font-weight:700;text-decoration:none;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s ease;font-size:.92rem}
+.session-body{width:100%;padding:17px 18px;display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden}
+.topic{max-width:100%;overflow-wrap:anywhere;word-break:normal;font-size:1rem;line-height:1.48;font-weight:800;color:#18334f;margin-bottom:2px}
+.tools{width:100%;min-width:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:3px}
+.btn{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;appearance:none;border:none;cursor:pointer;border-radius:14px;padding:11px 12px;font-weight:700;text-decoration:none;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s ease;font-size:.92rem}
 .btn:hover{transform:translateY(-1px)}
 .resource-disabled{opacity:.48;cursor:not-allowed;box-shadow:none!important;transform:none!important}
 .btn-primary{background:linear-gradient(135deg,#b71c1c,#e9433b);color:#fff;box-shadow:0 6px 14px rgba(183,28,28,.17)}
@@ -168,22 +169,35 @@ body{
 .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:#eef5ff;color:#204360;padding:6px 10px;font-size:.82rem;font-weight:700}
 .resource-help{font-size:.88rem;color:#5d738a;margin-top:8px}
 @media (max-width:980px){
-  .session-card{grid-template-columns:150px 1fr}
+  .main{padding:0 14px 28px}
+  .session-card{grid-template-columns:140px minmax(0,1fr)}
   .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-  .session-grid{grid-template-columns:1fr 1fr}
-}
-@media (max-width:640px){
-  .course-line{white-space:normal}
-  .asean-topic{font-size:.80rem}
-  .session-card{grid-template-columns:1fr}
-  .session-head{padding:13px 14px}
-  .tools{grid-template-columns:1fr}
-}
+@media (max-width:700px){
+  .main{padding:0 10px 24px;margin-top:-10px}
+  .panel{padding:12px;border-radius:18px}
+  .course-line{white-space:normal;font-size:.78rem}
   .asean-badges{grid-template-columns:1fr}
-  .asean-topic{font-size:.76rem}
+  .asean-topic{font-size:.80rem}
   .session-grid{grid-template-columns:1fr}
-  .tools{grid-template-columns:1fr 1fr}
+  .session-card{display:block;width:100%;min-width:0}
+  .session-head{width:100%;min-height:auto;padding:12px 14px}
+  .session-body{width:100%;min-width:0;padding:14px;overflow:visible}
+  .topic{font-size:.98rem;line-height:1.42;overflow-wrap:anywhere}
+  .tools{grid-template-columns:1fr;width:100%;min-width:0}
+  .btn,.btn-game{grid-column:auto;width:100%;min-width:0;max-width:100%;white-space:normal}
+  .quote{font-size:.80rem}
+  .dashboard-grid{grid-template-columns:1fr}
+  .attempts{font-size:.82rem}
+}
+@media (max-width:420px){
+  .main{padding-left:8px;padding-right:8px}
+  .panel{padding:10px;border-radius:16px}
+  .session-body{padding:12px}
+  .day-chip{font-size:.78rem;padding:5px 9px}
+  .day-letter{width:28px;height:28px;flex-basis:28px;font-size:.86rem}
+  .btn{padding:11px 10px;font-size:.90rem}
+  .topic{font-size:.94rem}
 }
 </style>
 </head>
