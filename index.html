@@ -1,291 +1,525 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fil">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#315b73" />
-  <meta name="description" content="Araling Panlipunan 7 interactive learning app on ASEAN and the UN Sustainable Development Goals." />
-
-  <!-- PWA -->
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-
-  <title>Southeast Asia Sustainability Lab | A-S-E-A-N Learning Journey</title>
-  <style>
-    :root{
-      --navy:#274b61;
-      --blue:#416f87;
-      --teal:#4f8d91;
-      --ink:#29424f;
-      --muted:#647c86;
-      --paper:#f7fafb;
-      --white:#ffffff;
-      --line:#dce8ec;
-      --shadow:0 18px 44px rgba(39,75,97,.10);
-      --p1:#e7f3fb;
-      --p1a:#6f9fbd;
-      --p2:#e6f5f1;
-      --p2a:#5e9b8e;
-      --p3:#eeeafa;
-      --p3a:#8479b0;
-      --p4:#e8effb;
-      --p4a:#6f87b6;
-      --p5:#e6f4f6;
-      --p5a:#5f96a0;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 8% 0%, rgba(111,159,189,.14), transparent 27rem),
-        radial-gradient(circle at 95% 8%, rgba(132,121,176,.10), transparent 25rem),
-        var(--paper);
-      line-height:1.55;
-    }
-    a{color:inherit}
-    .wrap{width:min(1160px, calc(100% - 34px));margin-inline:auto}
-    .hero{
-      position:relative;
-      overflow:hidden;
-      color:white;
-      background:linear-gradient(120deg,#274b61 0%,#3f7084 55%,#548f90 100%);
-      padding:48px 0 34px;
-      border-bottom:5px solid rgba(255,255,255,.42);
-    }
-    .hero::before,.hero::after{
-      content:"";position:absolute;border-radius:999px;pointer-events:none
-    }
-    .hero::before{width:430px;height:430px;right:-200px;top:-255px;background:rgba(255,255,255,.08)}
-    .hero::after{width:250px;height:250px;left:-125px;bottom:-170px;border:42px solid rgba(255,255,255,.07)}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:.5rem;
-      padding:7px 11px;border:1px solid rgba(255,255,255,.28);border-radius:999px;
-      background:rgba(255,255,255,.07);
-      font-size:.76rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
-    }
-    h1{
-      margin:17px 0 8px;
-      font-size:clamp(2.25rem,5vw,4.65rem);
-      line-height:.98;letter-spacing:-.05em;
-      max-width:850px;
-    }
-    .subtitle{
-      margin:0 0 19px;
-      color:#e9f6f7;
-      font-size:clamp(1.05rem,2vw,1.34rem);
-      font-weight:750;
-    }
-    .competency{
-      max-width:930px;margin:0;
-      padding:15px 18px;
-      border-left:4px solid #d7e8ef;
-      background:rgba(255,255,255,.08);
-      border-radius:0 15px 15px 0;
-    }
-    .competency strong{
-      display:block;margin-bottom:3px;
-      color:#d8eef3;
-      font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;
-    }
-    .journey{
-      display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
-      margin-top:26px;
-    }
-    .step{
-      min-height:102px;padding:12px 13px;
-      border:1px solid rgba(255,255,255,.22);
-      border-radius:15px;
-      background:rgba(255,255,255,.075);
-      backdrop-filter:blur(2px);
-    }
-    .step b{display:block;font-size:1.65rem;line-height:1;color:#fff;margin-bottom:6px}
-    .step span{display:block;font-size:.8rem;font-weight:850;letter-spacing:.045em;text-transform:uppercase}
-    .step small{display:block;margin-top:5px;color:#dcecef;line-height:1.3}
-    main{padding:34px 0 58px}
-    .intro{
-      display:flex;justify-content:space-between;align-items:end;gap:24px;
-      margin:6px 0 18px;
-    }
-    .intro h2{
-      margin:0;color:var(--navy);
-      font-size:clamp(1.75rem,3vw,2.45rem);letter-spacing:-.04em;
-    }
-    .intro p{max-width:620px;margin:0;color:var(--muted)}
-
-    .lab-shell{
-      background:rgba(255,255,255,.88);
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:22px;
-      box-shadow:var(--shadow);
-    }
-    .activity-grid{
-      display:grid;
-      grid-template-columns:repeat(6,1fr);
-      gap:16px;
-    }
-    .activity{
-      --card:#eef5f7;
-      --accent:#6f9fbd;
-      position:relative;
-      display:flex;flex-direction:column;
-      min-height:235px;
-      padding:20px;
-      border:1px solid rgba(74,111,128,.13);
-      border-radius:22px;
-      background:var(--card);
-      box-shadow:0 8px 22px rgba(39,75,97,.06);
-      overflow:hidden;
-      text-decoration:none;
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .activity::after{
-      content:"";
-      position:absolute;width:110px;height:110px;border-radius:50%;
-      right:-48px;bottom:-50px;
-      background:color-mix(in srgb, var(--accent) 18%, transparent);
-      pointer-events:none;
-    }
-    .activity:hover{transform:translateY(-4px);box-shadow:0 15px 32px rgba(39,75,97,.11)}
-    .activity:nth-child(1){--card:var(--p1);--accent:var(--p1a)}
-    .activity:nth-child(2){--card:var(--p2);--accent:var(--p2a)}
-    .activity:nth-child(3){--card:var(--p3);--accent:var(--p3a)}
-    .activity:nth-child(4){--card:var(--p4);--accent:var(--p4a)}
-    .activity:nth-child(5){--card:var(--p5);--accent:var(--p5a)}
-    .activity:nth-child(1),
-    .activity:nth-child(2),
-    .activity:nth-child(3){grid-column:span 2}
-    .activity:nth-child(4){grid-column:2 / span 2}
-    .activity:nth-child(5){grid-column:4 / span 2}
-    .phase{
-      width:42px;height:42px;
-      display:grid;place-items:center;
-      border-radius:13px;
-      background:var(--accent);color:white;
-      font-size:1.25rem;font-weight:900;
-      box-shadow:0 7px 16px rgba(39,75,97,.10);
-    }
-    .kicker{
-      margin:14px 0 7px;
-      color:var(--accent);
-      font-size:.73rem;font-weight:900;letter-spacing:.085em;text-transform:uppercase;
-    }
-    .activity h3{
-      margin:0 0 9px;
-      color:var(--navy);
-      font-size:1.15rem;line-height:1.22;
-    }
-    .activity p{margin:0;color:#536f7b;font-size:.9rem;line-height:1.48}
-    .action{
-      margin-top:auto;padding-top:18px;
-      display:flex;align-items:center;gap:8px;
-      color:var(--accent);font-weight:850;font-size:.87rem;
-    }
-    .action .arrow{
-      width:27px;height:27px;border-radius:50%;
-      display:grid;place-items:center;background:rgba(255,255,255,.52);
-      font-size:1rem;
-    }
-    .footer{
-      margin:29px 0 0;text-align:center;color:#71858e;font-size:.86rem
-    }
-    .footer strong{color:var(--navy)}
-    @media (max-width:900px){
-      .journey{grid-template-columns:repeat(2,1fr)}
-      .activity-grid{grid-template-columns:repeat(2,1fr)}
-      .activity:nth-child(n){grid-column:auto}
-    }
-    @media (max-width:640px){
-      .wrap{width:min(100% - 20px,1160px)}
-      .hero{padding-top:34px}
-      .journey,.activity-grid{grid-template-columns:1fr}
-      .intro{display:block}
-      .intro p{margin-top:7px}
-      .lab-shell{padding:14px;border-radius:20px}
-      .activity{min-height:210px}
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ASEAN at Likas-Kayang Pag-unlad</title>
+<style>
+:root{
+  --bg1:#0b2038; --bg2:#143f5e; --card:#ffffff; --text:#142033; --muted:#63738a;
+  --accent:#b3261e; --accent2:#f0b429; --accent3:#1fa7a8; --accent4:#7c3aed;
+  --soft:#f4f7fb; --line:#dfe7f2; --success:#1d7f4e; --danger:#b3261e;
+  --shadow:0 14px 40px rgba(7,24,45,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(240,180,41,.18), transparent 24%),
+    radial-gradient(circle at top right, rgba(179,38,30,.18), transparent 26%),
+    linear-gradient(180deg,#f7fbff 0%,#eff5fb 100%);
+}
+.hero{
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:#fff; padding:34px 20px 28px; position:relative; overflow:hidden;
+}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;opacity:.16;pointer-events:none}
+.hero::before{width:220px;height:220px;right:-60px;top:-60px;background:var(--accent2)}
+.hero::after{width:170px;height:170px;left:-40px;bottom:-50px;background:var(--accent3)}
+.wrap{max-width:1320px;margin:0 auto;position:relative;z-index:1}
+.hero-grid{display:block}
+.title{font-size:clamp(1.8rem,3vw,3rem);margin:0 0 8px;line-height:1.08;font-weight:800}
+.subtitle{margin:0;font-size:1rem;line-height:1.6;color:rgba(255,255,255,.92);max-width:760px}
+.course-line{
+  margin-top:6px;
+  color:rgba(255,255,255,.88);
+  font-size:.82rem;
+  line-height:1.35;
+  white-space:nowrap;
+}
+.course-line strong{color:#ffe387;font-weight:800}
+.asean-badges{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin:22px 0 0;
+  width:100%;
+  max-width:980px;
+  align-items:stretch;
+}
+.asean-step{
+  min-width:0;
+  text-align:left;
+  padding:13px 15px 12px;
+  border-radius:17px;
+  background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.asean-heading{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+.asean-heading .badge{
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  margin:0;
+  font-size:1rem;
+}
+.asean-label{
+  color:#fff;
+  font-size:.88rem;
+  line-height:1.16;
+  font-weight:900;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  text-shadow:0 1px 2px rgba(0,0,0,.16);
+}
+.asean-topic{
+  margin:0;
+  color:rgba(255,255,255,.88);
+  font-size:.84rem;
+  line-height:1.42;
+  font-weight:650;
+  text-align:left;
+}
+.step-a1{border-top:4px solid #ef5350}
+.step-s{border-top:4px solid #27c2c5}
+.step-e{border-top:4px solid #a98aff}
+.step-a2{border-top:4px solid #ff9f43}
+.step-n{border-top:4px solid #48c9a9}
+.step-a1 .badge{background:#d62d2d}
+.step-s .badge{background:#12979a}
+.step-e .badge{background:#7751d5}
+.step-a2 .badge{background:#d97822}
+.step-n .badge{background:#13836e}
+.badge{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.28rem;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.main{max-width:1320px;margin:-16px auto 0;padding:0 20px 30px}
+.panel{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:22px;margin-bottom:22px}
+.section-title{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.section-title h2{margin:0;font-size:1.35rem;color:#16324a}
+.section-title p{margin:6px 0 0;color:var(--muted)}
+.session-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
+.session-card{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);display:grid;grid-template-columns:minmax(150px,190px) 1fr;min-height:100%}
+.session-head{padding:18px 16px;color:#fff;position:relative;background:linear-gradient(135deg,#8f1917,#c33228 58%,#f0b429);display:flex;align-items:flex-start}
+.session-card[data-letter="S"] .session-head{background:linear-gradient(135deg,#0f4d67,#1fa7a8 58%,#9fe3da)}
+.session-card[data-letter="E"] .session-head{background:linear-gradient(135deg,#50308c,#7c3aed 58%,#c5b3ff)}
+.session-card[data-letter="N"] .session-head{background:linear-gradient(135deg,#004f48,#108775 58%,#7ce3b8)}
+.day-letter-line{display:flex;align-items:center;justify-content:flex-start;gap:8px;flex-wrap:nowrap}
+.day-chip{display:inline-flex;align-items:center;font-size:.82rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.18);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.day-letter{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.22);font-size:.92rem;font-weight:900;color:#fff;flex:0 0 30px}
+.session-head h3{margin:0 0 4px;font-size:1.08rem;line-height:1.3}
+.session-head .micro{margin:0;font-size:.93rem;opacity:.96}
+.session-body{padding:17px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.topic{font-size:1rem;line-height:1.48;font-weight:800;color:#18334f;margin-bottom:2px}
+.tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:3px}
+.btn{appearance:none;border:none;cursor:pointer;border-radius:14px;padding:11px 12px;font-weight:700;text-decoration:none;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s ease;font-size:.92rem}
+.btn:hover{transform:translateY(-1px)}
+.resource-disabled{opacity:.48;cursor:not-allowed;box-shadow:none!important;transform:none!important}
+.btn-primary{background:linear-gradient(135deg,#b71c1c,#e9433b);color:#fff;box-shadow:0 6px 14px rgba(183,28,28,.17)}
+.btn-accent{background:linear-gradient(135deg,#087d87,#19aaa8);color:#fff;box-shadow:0 6px 14px rgba(8,125,135,.17)}
+.btn-alt{background:linear-gradient(135deg,#5b3bb1,#8159d8);color:#fff;border:1px solid #7250c7;box-shadow:0 6px 14px rgba(91,59,177,.17)}
+.btn-game{grid-column:1/-1;background:linear-gradient(135deg,#13795b,#24a87a);color:#fff;border:1px solid #168864;box-shadow:0 6px 14px rgba(19,121,91,.18)}
+.btn-soft{background:linear-gradient(135deg,#f0ae2e,#ffd368);color:#563900;border:1px solid #e6b440;box-shadow:0 6px 14px rgba(240,174,46,.18)}
+.quote{margin-top:auto;padding:10px 11px;border-radius:14px;background:#f7f9fd;border-left:4px solid var(--accent2);color:#44546a;font-style:italic;line-height:1.42;font-size:.82rem}
+.meta-links{display:grid;gap:8px}
+.meta-row{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px dashed #d6e2ef;border-radius:14px;padding:10px 12px;font-size:.9rem;color:#4b6076;background:#fcfdff}
+.meta-row strong{color:#173654}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:14px}
+.stat{border:1px solid var(--line);border-radius:18px;background:#fbfdff;padding:16px}
+.stat .big{font-size:1.6rem;font-weight:800;color:#153550;margin-top:4px}
+.mini{color:var(--muted);font-size:.9rem}
+.attempts{margin-top:16px;border-collapse:collapse;width:100%;font-size:.93rem}
+.attempts th,.attempts td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left}
+.attempts th{color:#395470;background:#f6f9fd}
+#quizPanel{display:none}
+.quiz-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-bottom:14px}
+.quiz-topics h3{margin:0 0 4px;color:#14324b;font-size:1.35rem}
+.quiz-topics p{margin:0;color:var(--muted);line-height:1.5}
+.timer-box{min-width:180px;border:1px solid var(--line);background:#fbfdff;border-radius:18px;padding:12px 14px;text-align:center}
+.timer-box .time{font-size:1.6rem;font-weight:800;color:#16324a;margin-top:4px}
+.progress{margin:14px 0 20px;height:12px;background:#ecf2f8;border-radius:999px;overflow:hidden}
+.progress > span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent3),var(--accent2));transition:width .2s ease}
+.question-card{border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;background:#fff}
+.question-no{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#edf4fb;color:#18334f;font-weight:800;margin-bottom:10px}
+.question-stem{font-size:1rem;line-height:1.6;font-weight:700;color:#17324a;margin-bottom:12px}
+.choice-list{display:grid;gap:10px}
+.choice{border:1px solid #d8e5f0;border-radius:14px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;background:#fff;cursor:pointer;text-align:left}
+.choice:hover{background:#f7fbff}
+.choice.correct{background:#e5f6ec;border-color:#76b991}
+.choice.wrong{background:#fff0ef;border-color:#dc8c86}
+.choice.locked{cursor:default}
+.choice input{margin-top:2px;flex:0 0 auto}
+.feedback-box{margin-top:14px;padding:12px 14px;border-radius:14px;font-weight:700;line-height:1.45}
+.feedback-box.ok{background:#e7f7ed;color:#17613b;border:1px solid #a9d8ba}
+.feedback-box.no{background:#fff0ef;color:#842b25;border:1px solid #e3aaa5}
+.quiz-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.result{margin-top:18px;border:1px solid var(--line);border-radius:20px;padding:18px;background:#fbfdff}
+.score{font-size:1.5rem;font-weight:800;color:#153550;margin:0 0 4px}
+.wrong-list{display:grid;gap:14px;margin-top:16px}
+.wrong-item{border:1px solid #ead6d4;background:#fff8f7;border-radius:16px;padding:14px}
+.wrong-item strong{color:#7e1f19}
+.footer-note{text-align:center;color:#556a80;font-size:.92rem;padding:8px 0 20px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:#eef5ff;color:#204360;padding:6px 10px;font-size:.82rem;font-weight:700}
+.resource-help{font-size:.88rem;color:#5d738a;margin-top:8px}
+@media (max-width:980px){
+  .session-card{grid-template-columns:150px 1fr}
+  .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+  .session-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .course-line{white-space:normal}
+  .asean-topic{font-size:.80rem}
+  .session-card{grid-template-columns:1fr}
+  .session-head{padding:13px 14px}
+  .tools{grid-template-columns:1fr}
+}
+  .asean-badges{grid-template-columns:1fr}
+  .asean-topic{font-size:.76rem}
+  .session-grid{grid-template-columns:1fr}
+  .tools{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Araling Panlipunan 7 · Ikatlong Termino · Ikasiyam na Linggo</div>
-      <h1>Sustainability Lab</h1>
-      <p class="subtitle">A-S-E-A-N: Mula Adhikain, Tungo sa Aksiyon</p>
-      <p class="competency">
-        <strong>Learning Competency</strong>
-        Nasusuri ang mga hamon at tugon ng ASEAN sa pagtamo ng likas-kayang pag-unlad (sustainable development).
-      </p>
-      <div class="journey" aria-label="A-S-E-A-N learning journey">
-        <div class="step"><b>A</b><span>Adhikain</span><small>Ano ang nais makamit?</small></div>
-        <div class="step"><b>S</b><span>Sagot</span><small>Paano tumutugon ang ASEAN?</small></div>
-        <div class="step"><b>E</b><span>Ebidensiya</span><small>Ano ang ipinakikita ng ebidensiya?</small></div>
-        <div class="step"><b>A</b><span>Angkop</span><small>Angkop ba sa ibang konteksto?</small></div>
-        <div class="step"><b>N</b><span>Nagmumungkahi</span><small>Ano ang maimumungkahi natin?</small></div>
-      </div>
-    </div>
-  </header>
-  <main class="wrap">
-    <div class="intro">
-      <div><h2>Interactive Missions</h2></div>
-      <p>Limang gawain. Limang lente ng pagsusuri. Sundan ang A-S-E-A-N flow mula pagkilala ng adhikain hanggang pagbuo ng mungkahing may batayan.</p>
-    </div>
-    <section class="lab-shell" aria-label="Interactive activities">
-      <div class="activity-grid">
-        <a class="activity" href="UN SDG.html" aria-label="Buksan ang SDG Signal interactive">
-          <span class="phase">A</span>
-          <span class="kicker">Adhikain · Decode the Goals</span>
-          <h3>SDG SIGNAL: ANONG GOAL ITO?</h3>
-          <p>Kilalanin ang 17 Sustainable Development Goals at buuin ang pundasyon ng sustainability journey.</p>
-          <span class="action"><span class="arrow">→</span> Buksan ang activity</span>
-        </a>
-        <article class="activity">
-          <span class="phase">S</span>
-          <span class="kicker">Sagot · Match the Response</span>
-          <h3>HAMON ↔ TUGON</h3>
-          <p>Basahin ang hamong panrehiyon at tukuyin kung aling mekanismo o programa ang pinakaangkop na tugon.</p>
-          <span class="action"><span class="arrow">↔</span> Hanapin ang tugma</span>
-        </article>
-        <article class="activity">
-          <span class="phase">E</span>
-          <span class="kicker">Ebidensiya · Investigate the Case</span>
-          <h3>CASE FILE: EBIDENSIYA BAGO HATOL</h3>
-          <p>Siyasatin ang hamon, hakbang, SDG, ebidensiya, antas ng pagkilos, at limitasyon bago bumuo ng pasya.</p>
-          <span class="action"><span class="arrow">⌕</span> Suriin ang case</span>
-        </article>
-        <article class="activity">
-          <span class="phase">A</span>
-          <span class="kicker">Angkop · Decide with Evidence</span>
-          <h3>ANGKOP CHECK: ADOPT • ADAPT • NOT YET?</h3>
-          <p>Timbangin ang ebidensiya, konteksto, kakayahan, at limitasyon bago pumili ng pinakamakatuwirang pasya.</p>
-          <span class="action"><span class="arrow">✓</span> Bumuo ng hatol</span>
-        </article>
-        <article class="activity">
-          <span class="phase">N</span>
-          <span class="kicker">Nagmumungkahi · Turn Evidence into Action</span>
-          <h3>IDEYA → AKSIYON: MAY BATAYAN BA?</h3>
-          <p>Gamitin ang natutuhan sa rehiyon upang bumuo, suriin, at pahusayin ang isang evidence-informed na mungkahi.</p>
-          <span class="action"><span class="arrow">✦</span> Iangat ang mungkahi</span>
-        </article>
-      </div>
-    </section>
-    <p class="footer"><strong>Adhikain → Sagot → Ebidensiya → Angkop → Nagmumungkahi</strong><br />Mula pag-unawa tungo sa responsableng pagkilos.</p>
-  </main>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1 class="title">ASEAN AT LIKAS-KAYANG PAG-UNLAD</h1>
+        <div class="course-line">Araling Panlipunan 7 &nbsp;•&nbsp; <strong>Ikatlong Termino</strong> &nbsp;•&nbsp; <strong>Ikasiyam na Linggo</strong></div>
 
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js")
-          .catch((error) => console.error("Service worker registration failed:", error));
-      });
-    }
-  </script>
+        <div class="asean-badges" aria-label="ASEAN lesson structure">
+          <div class="asean-step step-a1">
+            <div class="asean-heading"><div class="badge">A</div><div class="asean-label">ADHIKAIN 2030</div></div>
+            <div class="asean-topic">Ang 17 Sustainable Development Goals (SDGs) ng United Nations Batay sa Framework ng ASEAN</div>
+          </div>
+          <div class="asean-step step-s">
+            <div class="asean-heading"><div class="badge">S</div><div class="asean-label">SAGOT NG ASEAN</div></div>
+            <div class="asean-topic">Mga Tugon ng ASEAN sa Pagtamo ng Likas-Kayang Pag-unlad</div>
+          </div>
+          <div class="asean-step step-e">
+            <div class="asean-heading"><div class="badge">E</div><div class="asean-label">EBIDENSIYA SA REHIYON</div></div>
+            <div class="asean-topic">Mga Hakbangin ng mga Bansa at Pamayanan sa Timog-Silangang Asya Kaugnay ng Likas-Kayang Pag-unlad</div>
+          </div>
+          <div class="asean-step step-a2">
+            <div class="asean-heading"><div class="badge">A</div><div class="asean-label">ANO ANG HAMON?</div></div>
+            <div class="asean-topic">Mga Hamong Hinaharap ng ASEAN sa Pagtamo ng Likas-Kayang Pag-unlad</div>
+          </div>
+          <div class="asean-step step-n">
+            <div class="asean-heading"><div class="badge">N</div><div class="asean-label">NAGMUMUNGKAHI NANG MAY BATAYAN</div></div>
+            <div class="asean-topic">Pagsusuri sa Kaangkupan ng mga Tugon at Pagbuo ng Evidence-Informed na Aksiyon para sa Likas-Kayang Pag-unlad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <section class="panel" id="sessionPanel">
+    <div class="session-grid" id="sessionGrid"></div>
+    
+  </section>
+
+  <section class="panel" id="quizPanel">
+    <div class="quiz-head">
+      <div class="quiz-topics">
+        <div class="pill" id="quizLetter"></div>
+        <h3 id="quizTitle">Interactive Practice</h3>
+        <p id="quizMeta"></p>
+      </div>
+      <div class="timer-box">
+        <div class="mini">Oras na ginugol</div>
+        <div class="time" id="timerDisplay">00:00</div>
+      </div>
+    </div>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+    <form id="quizForm"></form>
+    <div class="action-row">
+      <button class="btn btn-alt" id="backBtn" type="button">Bumalik sa Mga Session</button>
+    </div>
+    <div id="resultBox"></div>
+  </section>
+
+  <section class="panel" id="dashboardPanel">
+    <div class="section-title">
+      <div>
+        <h2>Parent Dashboard / Practice Tracker</h2>
+        <p>Naka-save sa browser ang attempts, score, at oras na ginugol.</p>
+      </div>
+      <span class="pill">Local Progress</span>
+    </div>
+    <div class="dashboard-grid" id="dashboardStats"></div>
+    <div id="attemptTableWrap"></div>
+  </section>
+
+  <div class="footer-note">“Bawat aral na may batayan ay hakbang tungo sa mas makatarungan at likas-kayang kinabukasan.”</div>
+</main>
+
+<script>
+const sessions = [{"id": "s1", "day": "Unang Araw", "letter": "A", "section": "ADHIKAIN 2030", "topic": "Ang 17 Sustainable Development Goals (SDGs) ng United Nations Batay sa Framework ng ASEAN", "youtube": "https://youtu.be/yCt2Cn1Yp00", "pptUrl": "https://depedph-my.sharepoint.com/:p:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQD5C5cF7nzvSo_0qA_50LGTAXQOvZhIbFB8NpWeQ1iUZB8?e=vwSGRM", "workbookUrl": "https://depedph-my.sharepoint.com/:w:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQBYPN282PusSZB4w17m7ZYWAe11Tr6rXGsOKV3CdIWmtM8?e=3cs6ud", "quote": "Maraming hamon. Maraming layunin. Iisang kinabukasan. Hindi masama ang pag-unlad, mas mahalaga kung paano ito nakabubuti nang walang naiiwan.", "questions": [{"stem": "Aling 5P ang tumutukoy sa kooperasyon, pagbabahagi ng kaalaman, at sama-samang pagkilos?", "options": ["People", "Planet", "Peace", "Partnership"], "answer": "Partnership"}, {"stem": "Aling 5P ang nakatuon sa tubig, klima, karagatan, kagubatan, at biodiversity?", "options": ["Prosperity", "Planet", "Peace", "People"], "answer": "Planet"}, {"stem": "Aling 5P ang may pokus sa kalusugan, edukasyon, pagkain, at pagkakapantay-pantay?", "options": ["People", "Prosperity", "Peace", "Partnership"], "answer": "People"}, {"stem": "Aling 5P ang may kinalaman sa katarungan, batas, matatag na institusyon, at mapayapang lipunan?", "options": ["Planet", "Peace", "Prosperity", "People"], "answer": "Peace"}, {"stem": "Aling 5P ang tumutukoy sa trabaho, enerhiya, inobasyon, at maunlad na pamayanan?", "options": ["Prosperity", "Partnership", "Planet", "Peace"], "answer": "Prosperity"}, {"stem": "Magbibigay ng trabaho ang isang food-processing plant, ngunit may panganib na marumihan ang ilog na ginagamit sa pangingisda at pang-araw-araw na pangangailangan. Aling pagsusuri ang malinaw na nagpapakita ng pagkakaugnay ng mga SDG?", "options": ["Pangunahing usapin lamang ito ng trabaho at kita.", "Magkaugnay ang trabaho, malinis na tubig, kalusugan, at yamang-dagat.", "Mas mahalaga ang Goal 8 dahil trabaho ang pangunahing pakinabang ng proyekto.", "Kailangang pumili lamang sa Goal 8 o Goal 14 upang maging malinaw ang pagsusuri."], "answer": "Magkaugnay ang trabaho, malinis na tubig, kalusugan, at yamang-dagat."}, {"stem": "Makababawas sa maruming enerhiya ang isang solar facility, ngunit ang lupang gagamitin ay pinagkukunan din ng kabuhayan ng ilang magsasaka. Ano ang mahalagang tanong bago ipatupad ang proyekto?", "options": ["Paano mapoprotektahan ang malinis na enerhiya at kabuhayan ng mga maaapektuhan?", "Gaano karaming solar panel ang maaaring mailagay sa buong lupang sakahan?", "Magkano ang maaaring kitain ng pamayanan kapag natapos ang solar-energy facility?", "Aling kompanya ang may pinakamabilis na kakayahang maitayo at mapatakbo ang proyekto?"], "answer": "Paano mapoprotektahan ang malinis na enerhiya at kabuhayan ng mga maaapektuhan?"}, {"stem": "Makapagpapabilis ng biyahe ang bagong terminal at mas malawak na kalsada, ngunit maaaring maapektuhan ang maliliit na tindahan, tahanan, at mga naglalakad. Aling impormasyon ang kailangang isaalang-alang bago magpasya?", "options": ["Bilang ng sasakyang daraan araw-araw.", "Halaga ng materyales na gagamitin sa proyekto.", "Epekto sa residente, negosyo, access, kaligtasan, at posibleng relokasyon.", "Bilang ng ibang lungsod na mayroon nang malalaking transport terminal at malalawak na kalsada."], "answer": "Epekto sa residente, negosyo, access, kaligtasan, at posibleng relokasyon."}, {"stem": "Ililipat ang isang flood-prone community sa mas ligtas na lugar, ngunit mas malayo ito sa paaralan, trabaho, pamilihan, at sakahan. Aling pagsusuri ang mas makatuwiran sa relocation plan?", "options": ["Mahalaga ang kaligtasan ngunit kailangan ding matiyak ang access sa kabuhayan at pangunahing serbisyo.", "Dapat manatili ang mga pamilya sa dating lugar upang hindi mawala ang kanilang kabuhayan.", "Sapat nang malayo sa baha ang relocation site kahit mahirap puntahan ang paaralan at trabaho.", "Mas mainam ang anumang relocation site kaysa sa dating pamayanan dahil pangunahing layunin lamang ang kaligtasan."], "answer": "Mahalaga ang kaligtasan ngunit kailangan ding matiyak ang access sa kabuhayan at pangunahing serbisyo."}, {"stem": "Ang digital learning ay may usapin sa access, ang relocation ay may usapin sa kabuhayan, at ang solar project ay may usapin sa paggamit ng lupa. Ano ang pagkakatulad ng tatlong sitwasyon?", "options": ["Lahat ay pangunahing suliraning pangkalikasan.", "Lahat ay nangangailangan ng malaking pampublikong pondo.", "May mga taong maaaring maiwan kung pakinabang lamang ng proyekto ang pagbabatayan.", "Parehong paraan ng pagpapatupad ang maaaring gamitin sa tatlong sitwasyon upang maging patas."], "answer": "May mga taong maaaring maiwan kung pakinabang lamang ng proyekto ang pagbabatayan."}], "extraInteractiveUrl": "assets/UN_SDG_Interactive.html", "extraInteractiveLabel": "SDG Interactive Quiz"}, {"id": "s2", "day": "Ikalawang Araw", "letter": "S", "section": "SAGOT NG ASEAN", "topic": "Mga Tugon ng ASEAN sa Pagtamo ng Likas-Kayang Pag-unlad", "youtube": "https://youtu.be/8sx_iPS6bK4", "pptUrl": "https://depedph-my.sharepoint.com/:p:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQAQoxfFVKQ3TYkElxPkOl5dAdcXVTSg6rfJ0c3KAIVF4pM?e=Qk8Jx9", "workbookUrl": "https://depedph-my.sharepoint.com/:w:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQCkAELzswrRTLlbGwHZtszbAS5mDBJafG7t6KYB2cS2iNs?e=f6XmmO", "quote": "Ang hamon ay maaaring tumawid sa hangganan ng isang bansa. Kaya ang sagot ng ASEAN ay kailangang nakaugat sa koordinasyon at pagtutulungan.", "questions": [{"stem": "Aling mekanismo ng ASEAN ang batayan ng pagtutulungang panrehiyon sa disaster management at emergency response?", "options": ["AADMER", "APASTI 2026–2035", "AWGNCB", "ASEAN Community Vision 2045"], "answer": "AADMER"}, {"stem": "Aling balangkas ng ASEAN ang nakatuon sa energy security, energy transition, at likas-kayang sistema ng enerhiya?", "options": ["APAEC 2026–2030", "AADMER", "AWGNCB", "Complementarities Initiative 2.0"], "answer": "APAEC 2026–2030"}, {"stem": "Aling tugon ng ASEAN ang nagpapalawak ng kooperasyon sa ibang bansa at panlabas na katuwang?", "options": ["APASTI 2026–2035", "ASEAN Dialogue and Development Partnerships", "AWGNCB", "AADMER Work Programme 2026–2030"], "answer": "ASEAN Dialogue and Development Partnerships"}, {"stem": "Aling mekanismo ang nagsusulong ng konserbasyon at likas-kayang paggamit ng biodiversity sa Timog-Silangang Asya?", "options": ["AWGNCB", "APAEC 2026–2030", "AADMER", "ASEAN Community Vision 2045"], "answer": "AWGNCB"}, {"stem": "Aling balangkas ang nakatuon sa pagpapalakas ng agham, teknolohiya, at inobasyon sa pagtugon sa mga hamong panrehiyon?", "options": ["APASTI 2026–2035", "AWGNCB", "ASEAN Dialogue and Development Partnerships", "APAEC 2026–2030"], "answer": "APASTI 2026–2035"}, {"stem": "Alin ang pangmatagalang direksiyon ng ASEAN tungo sa isang mas matatag, makabago, dinamiko, at nakasentro sa tao na rehiyon?", "options": ["ASEAN Community Vision 2045", "AADMER", "APASTI 2026–2035", "ASEAN Peatland Management Strategy 2023–2030"], "answer": "ASEAN Community Vision 2045"}, {"stem": "May hamong panrehiyon na nangangailangan ng bagong kaalaman at solusyong hindi kayang ibigay ng nakasanayang paraan lamang. Pangunahing kailangan ang pananaliksik, teknolohiya, at inobasyon sa pagbuo ng tugon. Aling balangkas ang may tungkuling pinakatugma?", "options": ["AADMER", "AWGNCB", "APASTI 2026–2035", "ASEAN Dialogue and Development Partnerships"], "answer": "APASTI 2026–2035"}, {"stem": "Isang malakas na sakuna ang sabay-sabay na nakaapekto sa maraming pamayanan. Kinakailangan ang mabilis na emergency response, paghahanda, koordinasyon, at pagtutulungan ng mga bansang kasapi. Aling mekanismo ang pinakaangkop?", "options": ["AADMER", "AWGNCB", "APAEC 2026–2030", "ASEAN Community Vision 2045"], "answer": "AADMER"}, {"stem": "May hamong panrehiyon na nangangailangan ng teknolohiya, karanasan, kaalaman, at iba pang mapagkukunang hindi sapat na taglay ng isang bansa lamang. Ang pangunahing pangangailangan ay mapalawak ang pakikipagtulungan sa mga panlabas na katuwang. Aling tugon ng ASEAN ang pinakamahusay na umaayon sa ganitong pangangailangan?", "options": ["AADMER", "AWGNCB", "APASTI 2026–2035", "ASEAN Dialogue and Development Partnerships"], "answer": "ASEAN Dialogue and Development Partnerships"}, {"stem": "Aling ugnayan ang pinakalohikal batay sa pangunahing tungkulin ng mekanismo?", "options": ["AADMER → Goal 4", "APAEC → Goal 7", "AWGNCB → Goal 8", "APASTI 2026–2035 → Goal 16"], "answer": "APAEC → Goal 7"}, {"stem": "Isang panrehiyong plano ang kailangang magtakda ng pangmatagalang direksiyon na hindi limitado sa kalikasan, enerhiya, kalamidad, o inobasyon lamang. Aling katangian ang pinakamalinaw na dahilan upang gamitin ang ASEAN Community Vision 2045?", "options": ["Pangmatagalang plano ito.", "Saklaw nito ang pangkalahatang direksiyon ng ASEAN Community.", "Iniuugnay nito ang lahat ng mekanismo ng ASEAN sa iisang sectoral program.", "Nagtatakda ito ng detalyadong programa para sa bawat hamong kinakaharap ng bawat bansang kasapi."], "answer": "Saklaw nito ang pangkalahatang direksiyon ng ASEAN Community."}], "extraInteractiveUrl": "", "extraInteractiveLabel": ""}, {"id": "s3", "day": "Ikatlong Araw", "letter": "E", "section": "EBIDENSIYA SA REHIYON", "topic": "Mga Hakbangin ng mga Bansa at Pamayanan sa Timog-Silangang Asya Kaugnay ng Likas-Kayang Pag-unlad", "youtube": "https://youtu.be/qCYAmoZ0npk", "pptUrl": "https://depedph-my.sharepoint.com/:p:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQCAZRasQRUPTLmtcUFrsFhqAdkW4-rqVnbu0SWpSxdBrhk?e=naxHhH", "workbookUrl": "https://depedph-my.sharepoint.com/:w:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQAHVDBaZBm1SodR5gVgc3r4AW62-SwkrUv15lNB5a14tx4?e=eE2Aev", "quote": "Ang SDGs ay hindi lamang mga bilang na dapat tandaan. Bawat hamon ay nangangailangan ng angkop na pagkilos at matibay na ebidensiya.", "questions": [{"stem": "Aling bansang ASEAN ang may limitadong lupain ngunit gumagamit ng teknolohiya, urban planning, water management, clean energy, biodiversity protection, at waste reduction sa pagsusulong ng sustainable development?", "options": ["Singapore", "Thailand", "Malaysia", "Indonesia"], "answer": "Singapore"}, {"stem": "Aling lungsod sa Indonesia ang kilala sa community recyclable-recovery centers na tinatawag na waste banks?", "options": ["Malang, Indonesia", "Luang Prabang", "Davao", "Pursat"], "answer": "Malang, Indonesia"}, {"stem": "Aling bansang ASEAN ang nag-uugnay ng turismo, inobasyon, entrepreneurship, digital technology, renewable energy, at pangangalaga sa kapaligiran sa pagsusulong ng likas-kayang pag-unlad?", "options": ["Thailand", "Brunei Darussalam", "Cambodia", "Pilipinas"], "answer": "Thailand"}, {"stem": "Aling dalawang lungsod sa Pilipinas ang kabilang sa mga halimbawang kinilala bilang model cities na nagsusulong ng mga lokal na hakbang kaugnay ng SDGs?", "options": ["Davao at Dipolog", "Cebu at Baguio", "Manila at Iloilo", "Davao at Malang"], "answer": "Davao at Dipolog"}, {"stem": "Aling UNESCO World Heritage City sa Lao PDR ang nagbigay-priyoridad sa wastewater treatment bilang bahagi ng lokal na sustainable-development action?", "options": ["Luang Prabang", "Vientiane", "Bangkok", "Bandar Seri Begawan"], "answer": "Luang Prabang"}, {"stem": "Itinataguyod ng Thailand sa Tourism Development Plan 2023–2027 ang turismo, innovation, at pag-unlad ng ekonomiya. Bilang dagdag na direksiyon, may mga target din ang BCG Economy Model para sa kita at mas sustainable na paggamit ng resources. Aling pagsusuri ang may pinakamatibay na batayan?", "options": ["Sapat na ang target upang masabing matagumpay na ang programa.", "Ipinakikita ng target na pantay na ang pakinabang sa lahat ng sektor.", "Malinaw ang direksiyon, ngunit kailangan pa ng aktuwal na resulta upang masukat ang bunga.", "Masasabing ganap na matagumpay ang BCG dahil may tiyak nang target sa kita at paglago ng ekonomiya."], "answer": "Malinaw ang direksiyon, ngunit kailangan pa ng aktuwal na resulta upang masukat ang bunga."}, {"stem": "May mga pambansang plano ang Pilipinas para sa climate resilience at disaster preparedness, at may malaking resources ding inilaan para sa climate-related programs. Gayunman, hindi pare-pareho ang kakayahan ng bawat lokalidad. Ano ang pinakamakatuwirang pagsusuri?", "options": ["Malaking pondo lamang ang kailangan upang maging handa ang mga lokalidad.", "Mahalaga ang pambansang plano, ngunit dapat ding suriin ang lokal na pagpapatupad.", "Sapat ang pambansang direksiyon upang matiyak ang pare-parehong resulta sa bawat pamayanan.", "Kapag malaki ang pondong inilaan, maituturing nang pantay ang kakayahan ng mga lokalidad sa climate adaptation."], "answer": "Mahalaga ang pambansang plano, ngunit dapat ding suriin ang lokal na pagpapatupad."}, {"stem": "Itinataguyod ng Malaysia ang green technology, energy efficiency, at renewable energy. Sa mas bagong energy-transition plans, may mga target ding itinakda ngunit nananatili ang hamon sa gastos, grid, permit, teknolohiya, at imprastraktura. Ano ang pinakatamang pagbasa sa sitwasyon?", "options": ["Maraming hadlang kaya mahina ang direksiyon ng energy transition.", "May roadmap, kaya maaari nang ituring na matagumpay ang pagbabago sa enerhiya.", "Mas mahalaga ang target kaysa sa mga problemang nararanasan sa aktuwal na implementasyon.", "Malinaw ang direksiyon, ngunit nakasalalay ang resulta sa paglutas sa gastos, grid, permit, at imprastraktura."], "answer": "Malinaw ang direksiyon, ngunit nakasalalay ang resulta sa paglutas sa gastos, grid, permit, at imprastraktura."}, {"stem": "Binibigyang-diin ng Thailand ang sustainable tourism at economic development. Sa Pilipinas naman, malaking diin ang ibinibigay sa climate resilience at disaster risk reduction. Ano ang pinakamainam na paliwanag sa pagkakaiba?", "options": ["Inaangkop ng bawat bansa ang tugon sa sariling hamon at priyoridad.", "Magkaiba ang programa dahil hindi maaaring magkaugnay ang kanilang mga SDG.", "Mas mabisa ang isang pambansang programa kapag mas marami itong saklaw na sektor at layunin.", "Ipinakikita ng pagkakaiba na walang panrehiyong direksiyon kapag hindi magkakapareho ang programa ng mga bansang ASEAN."], "answer": "Inaangkop ng bawat bansa ang tugon sa sariling hamon at priyoridad."}, {"stem": "Ang waste banks sa Malang ay tumutulong sa waste recovery at recycling. Maaari rin nitong bawasan ang basurang napupunta sa kapaligiran at hikayatin ang mas responsableng paggamit ng materials. Bakit makatwirang maiugnay ang ganitong hakbang sa higit sa isang SDG?", "options": ["Iisang SDG lamang ang dapat tukuyin sa bawat programa.", "Maraming SDG ang kailangan upang masabing malawak ang isang programa.", "Maaaring maiugnay ang isang hakbang sa maraming SDG kapag magkakaugnay ang mga epekto nito.", "Awtomatikong natutugunan ng waste-management program ang lahat ng SDG dahil nakaaapekto ang basura sa maraming bahagi ng pamayanan."], "answer": "Maaaring maiugnay ang isang hakbang sa maraming SDG kapag magkakaugnay ang mga epekto nito."}], "extraInteractiveUrl": "", "extraInteractiveLabel": ""}, {"id": "s4", "day": "Ikaapat na Araw", "letter": "A", "section": "ANO ANG HAMON?", "topic": "Mga Hamong Hinaharap ng ASEAN sa Pagtamo ng Likas-Kayang Pag-unlad", "youtube": "https://youtu.be/aeLiUs3SXJo", "pptUrl": "https://depedph-my.sharepoint.com/:p:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQAqzZ1ma_SeTKiqSS52QAM0AYIDYvO8D5vlN2BEwUCcmEg?e=iOejEY", "workbookUrl": "https://depedph-my.sharepoint.com/:w:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQD0aEQFC_dxRbMC-qC5zUYWAZvzIwaIRnX2fuG5nR_yjic?e=YVWJeg", "quote": "Hindi nasusukat ang pagkakaisa kapag magaan ang lahat. Nasusubok ito sa gitna ng magkakaibang interes at paninindigan.", "questions": [{"stem": "May usaping nakaaapekto sa rehiyon habang dalawang makapangyarihang bansa sa labas ng ASEAN ang parehong nagsisikap palawakin ang kanilang impluwensiya. Aling pangunahing BIGAT ang inilalarawan?", "options": ["Geopolitics at Seguridad", "Tatag ng Pamumuno at mga Institusyon", "Bantang Digital", "Agwat sa Ekonomiya"], "answer": "Geopolitics at Seguridad"}, {"stem": "Nagkasundo ang mga bansang kasapi sa isang hakbang, ngunit nahirapang tiyakin ang tuloy-tuloy at pare-parehong pagpapatupad nito. Aling pangunahing BIGAT ang inilalarawan?", "options": ["Iba-ibang Interes", "Tatag ng Pamumuno at mga Institusyon", "Agwat sa Ekonomiya", "Bantang Digital"], "answer": "Tatag ng Pamumuno at mga Institusyon"}, {"stem": "Parami nang parami ang serbisyo at transaksiyong umaasa sa magkakaugnay na computer systems, kasabay ng pagdami ng mga panganib na maaaring makaapekto sa kaligtasan ng mga ito. Aling BIGAT ang inilalarawan?", "options": ["Bantang Digital", "Iba-ibang Interes", "Geopolitics at Seguridad", "Tatag ng Pamumuno at mga Institusyon"], "answer": "Bantang Digital"}, {"stem": "May mga bansang mabilis makasunod sa isang panrehiyong patakaran dahil sapat ang kanilang pondo at imprastraktura, samantalang higit na limitado ang kakayahan ng iba. Aling BIGAT ang inilalarawan?", "options": ["Agwat sa Ekonomiya", "Bantang Digital", "Iba-ibang Interes", "Geopolitics at Seguridad"], "answer": "Agwat sa Ekonomiya"}, {"stem": "Sa isang sensitibong usapin, hindi magkatugma ang mga prayoridad at pananaw ng mga bansang kasapi kaya nahirapang magkaroon ng iisang pasiya. Aling BIGAT ang inilalarawan?", "options": ["Iba-ibang Interes", "Agwat sa Ekonomiya", "Tatag ng Pamumuno at mga Institusyon", "Bantang Digital"], "answer": "Iba-ibang Interes"}, {"stem": "Nagkasundo ang mga bansang kasapi sa isang panrehiyong hakbang. Gayunman, walang malinaw na mekanismong sumusubaybay kung naisasagawa nang tuloy-tuloy ang kanilang napagkasunduan. Aling BIGAT ang pinakatiyak na inilalarawan?", "options": ["Bantang Digital, dahil kailangang protektahan ang magkakaugnay na sistema", "Iba-ibang Interes, dahil kailangang pagtugmain ang pambansang prayoridad", "Tatag ng Pamumuno, dahil kailangang tiyakin ang tuloy-tuloy na pagpapatupad", "Agwat sa Ekonomiya, dahil kailangang pantayin ang kakayahan ng mga kasapi"], "answer": "Tatag ng Pamumuno, dahil kailangang tiyakin ang tuloy-tuloy na pagpapatupad"}, {"stem": "May panrehiyong patakarang nangangailangan ng bagong pasilidad at malaking resources. Mabilis itong naipatupad ng ilang bansang kasapi, ngunit nangangailangan pa ng karagdagang paghahanda ang iba. Aling BIGAT ang pinakatiyak na inilalarawan?", "options": ["Agwat sa Ekonomiya, dahil hindi pantay ang kakayahang maglaan ng resources", "Iba-ibang Interes, dahil hindi pareho ang pambansang prayoridad ng mga kasapi", "Geopolitics at Seguridad, dahil may pressure mula sa mga bansang panlabas", "Tatag ng Pamumuno, dahil walang institusyong sumusubaybay sa pagpapatupad"], "answer": "Agwat sa Ekonomiya, dahil hindi pantay ang kakayahang maglaan ng resources"}, {"stem": "May sensitibong usaping pangseguridad sa rehiyon. Nagkakaiba ang posisyon ng mga bansang kasapi habang may dalawang malalaking kapangyarihang nagtataguyod ng magkasalungat na interes. Alin ang pinakakumpletong pagsusuri?", "options": ["Magkaugnay ang Bantang Digital at Agwat sa Ekonomiya sa sitwasyon", "Magkaugnay ang Iba-ibang Interes at Geopolitics sa sitwasyon", "Magkaugnay ang Tatag ng Pamumuno at Bantang Digital sa sitwasyon", "Magkaugnay ang Agwat sa Ekonomiya at Tatag ng Pamumuno sa sitwasyon"], "answer": "Magkaugnay ang Iba-ibang Interes at Geopolitics sa sitwasyon"}, {"stem": "Dumarami ang mga serbisyong umaasa sa magkakaugnay na digital systems. Kasabay nito, lumalaki ang posibilidad na ang problema sa isang sistema ay makaapekto sa mas maraming gumagamit at transaksiyon. Aling BIGAT ang pinakatiyak na inilalarawan?", "options": ["Bantang Digital, dahil lumalawak ang mga sistemang kailangang protektahan", "Iba-ibang Interes, dahil dumarami ang pananaw na kailangang pagtugmain", "Agwat sa Ekonomiya, dahil lumalaki ang resources na kailangang ilaan", "Tatag ng Pamumuno, dahil dumarami ang pasiyang kailangang ipatupad"], "answer": "Bantang Digital, dahil lumalawak ang mga sistemang kailangang protektahan"}, {"stem": "May panrehiyong desisyong suportado ng karamihan sa mga bansang kasapi. Gayunman, nais ng ilang bansa na baguhin ang iskedyul at paraan ng pagpapatupad dahil may iba silang pambansang prayoridad. Aling pagsusuri ang pinakatiyak?", "options": ["Iba-ibang Interes ang hamon dahil nakaaapekto ang pambansang prayoridad sa pagpapatupad", "Agwat sa Ekonomiya ang hamon dahil nakaaapekto ang limitadong resources sa pagpapatupad", "Tatag ng Pamumuno ang hamon dahil nakaaapekto ang mahinang institusyon sa pagpapatupad", "Geopolitics at Seguridad ang hamon dahil nakaaapekto ang panlabas na pressure sa pagpapatupad"], "answer": "Iba-ibang Interes ang hamon dahil nakaaapekto ang pambansang prayoridad sa pagpapatupad"}], "extraInteractiveUrl": "", "extraInteractiveLabel": ""}, {"id": "s5", "day": "Ikalimang Araw", "letter": "N", "section": "NAGMUMUNGKAHI NANG MAY BATAYAN", "topic": "Pagsusuri sa Kaangkupan ng mga Tugon at Pagbuo ng Evidence-Informed na Aksiyon para sa Likas-Kayang Pag-unlad", "youtube": "https://youtu.be/dZJf7Qq9tp4", "pptUrl": "https://depedph-my.sharepoint.com/:p:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQCT7exVfqp4QLRIZdFtCr73AbvoWRIdx0wa7Feq9oiZtww?e=zFidXt", "workbookUrl": "https://depedph-my.sharepoint.com/:w:/g/personal/evelyngrace_tadeo_deped_gov_ph/IQA2sGXe1VFcQY6fT5nEZVHMAWa9LwCnlDn5f1XmM2roeOY?e=g047gr", "quote": "Mula sa ASEAN, may mga aral at ebidensiyang maaaring sandigan. Ngunit ang bawat tugon ay kailangang suriin, hindi basta kopyahin.", "questions": [{"stem": "Aling bansang case ang pinagmulan ng mungkahing classroom action na “PAPER SECOND LIFE”?", "options": ["Thailand", "Malaysia", "Indonesia", "Singapore"], "answer": "Thailand"}, {"stem": "Aling bansang case ang pinagmulan ng mungkahing classroom action na “READY BAGO KAILANGANIN”?", "options": ["Pilipinas", "Thailand", "Singapore", "Brunei Darussalam"], "answer": "Pilipinas"}, {"stem": "Aling bansang case ang pinagmulan ng mungkahing classroom action na “SWITCH OFF, SAVE ON”?", "options": ["Malaysia", "Indonesia", "Thailand", "Cambodia"], "answer": "Malaysia"}, {"stem": "Aling bansang case ang pinagmulan ng mungkahing classroom action na “DATA MUNA, AKSIYON SUNOD”?", "options": ["Indonesia", "Pilipinas", "Singapore", "Malaysia"], "answer": "Indonesia"}, {"stem": "Aling bansang case ang pinagmulan ng mungkahing classroom action na “GREEN SPACE, SHARED CARE”?", "options": ["Singapore", "Thailand", "Viet Nam", "Lao PDR"], "answer": "Singapore"}, {"stem": "Napansin ng isang pangkat na maraming one-sided paper ang itinatapon sa silid-aralan. Ginamit nilang inspirasyon ang Bio-Circular-Green Approach ng Thailand at iminungkahing magkaroon ng paper-reuse tray. Wala pa silang tala kung gaano karaming papel ang aktuwal na nasasayang. Aling pagsusuri ang pinakatiyak?", "options": ["May regional na batayan ang aksiyon, kaya sapat na ang ugnayan nito sa muling paggamit ng resources.", "May lokal na aplikasyon ang aksiyon, kaya sapat na ang pagkakaroon ng paper-reuse tray sa silid-aralan.", "May regional na batayan ang aksiyon, ngunit kailangan pa ng lokal na datos upang mapatunayan ang hamon.", "May lokal na pakinabang ang aksiyon, ngunit kailangan pa ng ibang regional case upang mapagtibay ang mungkahi."], "answer": "May regional na batayan ang aksiyon, ngunit kailangan pa ng lokal na datos upang mapatunayan ang hamon."}, {"stem": "Gumawa ang isang pangkat ng classroom readiness checklist matapos suriin ang climate adaptation at disaster preparedness sa Pilipinas. Nakabatay ang checklist sa umiiral na school safety procedures at susuriin kung nauunawaan ng mga mag-aaral ang mahahalagang impormasyon sa oras ng emergency. Aling pagsusuri ang pinakamatibay?", "options": ["Angkop ang checklist dahil pinanatili ang prinsipyo ng kahandaan at iniayon ito sa kakayahan ng silid-aralan.", "Kulang ang checklist dahil pinaliit ang prinsipyo ng kahandaan at iniayon lamang ito sa isang silid-aralan.", "Malawak ang checklist dahil ginamit ang prinsipyo ng kahandaan at iniugnay ito sa school safety procedures.", "Mahina ang checklist dahil sinukat ang prinsipyo ng kahandaan sa pamamagitan lamang ng emergency information."], "answer": "Angkop ang checklist dahil pinanatili ang prinsipyo ng kahandaan at iniayon ito sa kakayahan ng silid-aralan."}, {"stem": "Nais ng isang pangkat na gayahin ang malawakang paggamit ng renewable energy sa isang bansang ASEAN. Wala namang sapat na pondo, technical equipment, o awtoridad ang klase para mag-install ng bagong energy system. Sa halip, iminungkahi ang limang-araw na monitoring ng hindi kailangang paggamit ng ilaw at bentilador. Alin ang pinakakumpletong interpretasyon?", "options": ["Mas angkop ang installation plan dahil mas direktang kaugnay ito ng regional effort sa renewable energy.", "Mas angkop ang installation plan dahil mas malawak ang posibleng epekto nito sa paggamit ng enerhiya.", "Mas angkop ang monitoring plan dahil mas kaunti ang kagamitan at taong kakailanganin sa pagpapatupad.", "Mas angkop ang monitoring plan dahil pinanatili ang energy-efficiency principle at iniayon sa kakayahan ng klase."], "answer": "Mas angkop ang monitoring plan dahil pinanatili ang energy-efficiency principle at iniayon sa kakayahan ng klase."}, {"stem": "Nagpanukala ang isang pangkat ng classroom monitoring system. Iisang mag-aaral ang inatasang mag-check, magtala, maglinis, at mag-ulat araw-araw dahil siya raw ang “pinakamaaasahan.” Praktikal ang sistema at malinaw ang indicator. Aling pagsusuri ang pinakakumpleto?", "options": ["Maayos ang mekanismo, ngunit kailangang panatilihin ang iisang tagasubaybay upang maging pare-pareho ang datos.", "Maayos ang mekanismo, ngunit kailangang ipamahagi ang pananagutan upang maging patas at participatory ang pagkilos.", "Maayos ang indicator, ngunit kailangang bawasan ang monitoring upang hindi mabigatan ang inatasang mag-aaral.", "Maayos ang panukala, ngunit kailangang ipagawa sa lahat ang magkakaparehong tungkulin sa bawat araw."], "answer": "Maayos ang mekanismo, ngunit kailangang ipamahagi ang pananagutan upang maging patas at participatory ang pagkilos."}, {"stem": "Matapos pag-aralan ang Singapore, nagmungkahi ang isang pangkat ng malaking technology-based irrigation system para sa maliit na school garden. Iminungkahi naman ng isa pang pangkat ang umiikot na plant-care schedule at simpleng monitoring card gamit ang kasalukuyang kagamitan. Aling pagsusuri ang pinakamatibay?", "options": ["Mas angkop ang irrigation system dahil pinanatili nito ang paggamit ng teknolohiya mula sa regional case.", "Mas angkop ang irrigation system dahil binawasan nito ang regular na gawaing kailangan sa school garden.", "Mas angkop ang plant-care system dahil pinanatili nito ang sustainability principle at iniayon sa available resources.", "Mas angkop ang plant-care system dahil inalis nito ang pangangailangang gumamit ng teknolohiya sa school garden."], "answer": "Mas angkop ang plant-care system dahil pinanatili nito ang sustainability principle at iniayon sa available resources."}], "extraInteractiveUrl": "", "extraInteractiveLabel": ""}];
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+function formatTime(seconds){
+  const m=String(Math.floor(seconds/60)).padStart(2,'0');
+  const s=String(seconds%60).padStart(2,'0');
+  return `${m}:${s}`;
+}
+function getAttempts(){
+  try{return JSON.parse(localStorage.getItem('ap7_t3w9_asean_attempts')||'[]')}catch(e){return []}
+}
+function saveAttempt(entry){
+  const attempts=getAttempts();
+  attempts.unshift(entry);
+  localStorage.setItem('ap7_t3w9_asean_attempts', JSON.stringify(attempts.slice(0,80)));
+  renderDashboard();
+}
+
+function renderSessions(){
+  const grid=document.getElementById('sessionGrid');
+  grid.innerHTML=sessions.map(s=>`
+    <article class="session-card" data-letter="${escapeHtml(s.letter)}">
+      <div class="session-head">
+        <div class="day-letter-line"><div class="day-chip">${escapeHtml(s.day)}</div><div class="day-letter">${escapeHtml(s.letter)}</div></div>
+      </div>
+      <div class="session-body">
+        <div class="topic">${escapeHtml(s.topic)}</div>
+        <div class="tools">
+          <a class="btn btn-primary" href="${escapeHtml(s.youtube)}" target="_blank" rel="noopener">▶ YouTube Video</a>
+          <button class="btn btn-accent" type="button" onclick="startPractice('${s.id}')">✎ Interactive Practice</button>
+          ${s.pptUrl
+            ? `<a class="btn btn-alt" href="${escapeHtml(s.pptUrl)}" target="_blank" rel="noopener">▣ PPT / OneDrive</a>`
+            : `<span class="btn btn-alt resource-disabled" aria-disabled="true">⬇ PPT — To Follow</span>`}
+          ${s.workbookUrl
+            ? `<a class="btn btn-soft" href="${escapeHtml(s.workbookUrl)}" target="_blank" rel="noopener">▤ Workbook / OneDrive</a>`
+            : `<span class="btn btn-soft resource-disabled" aria-disabled="true">⬇ Workbook — To Follow</span>`}
+          ${s.extraInteractiveUrl
+            ? `<a class="btn btn-game" href="${escapeHtml(s.extraInteractiveUrl)}" target="_blank" rel="noopener">★ ${escapeHtml(s.extraInteractiveLabel || 'Extra Interactive')}</a>`
+            : ``}
+        </div>
+        <div class="quote">“${escapeHtml(s.quote)}”</div>
+      </div>
+    </article>
+  `).join('');
+}
+
+let currentSession=null;
+let currentQuestions=[];
+let currentIndex=0;
+let currentResponses=[];
+let currentAnswered=false;
+let quizStart=null;
+let timer=null;
+
+function startTimer(){
+  if(timer) clearInterval(timer);
+  timer=setInterval(()=>{
+    if(!quizStart) return;
+    const seconds=Math.floor((Date.now()-quizStart)/1000);
+    document.getElementById('timerDisplay').textContent=formatTime(seconds);
+  },1000);
+}
+function buildQuestionBank(items){
+  return shuffle(items).map(q=>({...q, options:shuffle(q.options)}));
+}
+function startPractice(sessionId,customQuestions=null){
+  const s=sessions.find(x=>x.id===sessionId);
+  if(!s) return;
+  currentSession=s;
+  currentQuestions=buildQuestionBank(customQuestions||s.questions);
+  currentIndex=0;
+  currentResponses=[];
+  currentAnswered=false;
+  quizStart=Date.now();
+  startTimer();
+  document.getElementById('sessionPanel').style.display='none';
+  document.getElementById('quizPanel').style.display='block';
+  document.getElementById('quizLetter').textContent=`${s.letter} • ${s.day}`;
+  document.getElementById('quizTitle').textContent=s.topic;
+  document.getElementById('quizMeta').innerHTML=`<strong>${escapeHtml(s.section)}</strong> • ${currentQuestions.length} items • Isang tanong bawat screen • Random ang tanong at choices sa bawat attempt.`;
+  document.getElementById('timerDisplay').textContent='00:00';
+  document.getElementById('resultBox').innerHTML='';
+  renderCurrentQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderCurrentQuestion(){
+  const q=currentQuestions[currentIndex];
+  const form=document.getElementById('quizForm');
+  currentAnswered=false;
+  const answeredCount=currentResponses.length;
+  const percent=currentQuestions.length?Math.round((answeredCount/currentQuestions.length)*100):0;
+  document.getElementById('progressBar').style.width=percent+'%';
+  form.innerHTML=`
+    <section class="question-card">
+      <div class="question-no">${currentIndex+1}</div>
+      <div class="mini" style="margin-bottom:8px;font-weight:700;">Tanong ${currentIndex+1} / ${currentQuestions.length}</div>
+      <div class="question-stem">${escapeHtml(q.stem)}</div>
+      <div class="choice-list" id="choiceList">
+        ${q.options.map((opt,optIdx)=>`
+          <button class="choice" type="button" data-value="${escapeHtml(opt)}" onclick="chooseAnswer(this, ${optIdx})">
+            <span><strong>${String.fromCharCode(65+optIdx)}.</strong> ${escapeHtml(opt)}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div id="questionFeedback"></div>
+      <div class="quiz-nav" id="questionNav"></div>
+    </section>
+  `;
+}
+function chooseAnswer(button,optIdx){
+  if(currentAnswered) return;
+  currentAnswered=true;
+  const q=currentQuestions[currentIndex];
+  const selected=q.options[optIdx];
+  const correct=selected===q.answer;
+  currentResponses.push({question:q,selected:selected,correct:correct});
+
+  const buttons=[...document.querySelectorAll('#choiceList .choice')];
+  buttons.forEach((b,i)=>{
+    b.classList.add('locked');
+    b.disabled=true;
+    const value=q.options[i];
+    if(value===q.answer) b.classList.add('correct');
+    if(i===optIdx && !correct) b.classList.add('wrong');
+  });
+
+  const feedback=document.getElementById('questionFeedback');
+  feedback.className='feedback-box '+(correct?'ok':'no');
+  feedback.innerHTML=correct
+    ? '✓ Tama!'
+    : `✗ Hindi tama. Tamang sagot: <strong>${escapeHtml(q.answer)}</strong>`;
+
+  const progress=Math.round(((currentIndex+1)/currentQuestions.length)*100);
+  document.getElementById('progressBar').style.width=progress+'%';
+
+  const nav=document.getElementById('questionNav');
+  const last=currentIndex===currentQuestions.length-1;
+  nav.innerHTML=`<button class="btn btn-primary" type="button" onclick="${last?'finishQuiz()':'nextQuestion()'}">${last?'Tingnan ang Resulta':'Susunod na Tanong'}</button>`;
+}
+function nextQuestion(){
+  if(!currentAnswered) return;
+  currentIndex++;
+  renderCurrentQuestion();
+  window.scrollTo({top:document.getElementById('quizPanel').offsetTop-10,behavior:'smooth'});
+}
+function finishQuiz(){
+  if(timer) clearInterval(timer);
+  const seconds=Math.floor((Date.now()-quizStart)/1000);
+  const score=currentResponses.filter(x=>x.correct).length;
+  const wrong=currentResponses.filter(x=>!x.correct);
+
+  saveAttempt({
+    sessionId:currentSession.id,
+    sessionTitle:currentSession.topic,
+    day:currentSession.day,
+    score:score,
+    total:currentQuestions.length,
+    seconds:seconds,
+    timestamp:new Date().toISOString()
+  });
+
+  document.getElementById('quizForm').innerHTML='';
+  document.getElementById('progressBar').style.width='100%';
+  const resultBox=document.getElementById('resultBox');
+  resultBox.innerHTML=`
+    <div class="result">
+      <p class="score">Iskor: ${score} / ${currentQuestions.length}</p>
+      <p class="mini">Oras na ginugol: <strong>${formatTime(seconds)}</strong></p>
+      <div class="action-row">
+        <button class="btn btn-primary" type="button" onclick="startPractice('${currentSession.id}')">Subukang Muli</button>
+        ${wrong.length?`<button class="btn btn-soft" type="button" onclick="retryWrongItems()">Ulitin ang Mali</button>`:''}
+      </div>
+      ${wrong.length?`<div class="wrong-list">
+        ${wrong.map((item,i)=>`
+          <div class="wrong-item">
+            <div><strong>${i+1}. ${escapeHtml(item.question.stem)}</strong></div>
+            <div style="margin-top:6px;line-height:1.6;"><strong>Iyong sagot:</strong> ${escapeHtml(item.selected)}</div>
+            <div style="margin-top:6px;line-height:1.6;"><strong>Tamang sagot:</strong> ${escapeHtml(item.question.answer)}</div>
+          </div>
+        `).join('')}
+      </div>`:`<p style="margin-top:14px;color:var(--success);font-weight:700;">Magaling! Wala kang maling sagot sa attempt na ito.</p>`}
+    </div>
+  `;
+  window.scrollTo({top:document.getElementById('resultBox').offsetTop-20,behavior:'smooth'});
+}
+function retryWrongItems(){
+  const wrongQuestions=currentResponses.filter(x=>!x.correct).map(x=>x.question);
+  if(!wrongQuestions.length) return;
+  startPractice(currentSession.id,wrongQuestions);
+}
+function backToSessions(){
+  if(timer) clearInterval(timer);
+  document.getElementById('quizPanel').style.display='none';
+  document.getElementById('sessionPanel').style.display='block';
+  document.getElementById('quizForm').innerHTML='';
+  document.getElementById('resultBox').innerHTML='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderDashboard(){
+  const attempts=getAttempts();
+  const statsWrap=document.getElementById('dashboardStats');
+  const totalAttempts=attempts.length;
+  const avgScore=totalAttempts ? (attempts.reduce((a,b)=>a+(b.score/b.total*100),0)/totalAttempts) : 0;
+  const totalSeconds=attempts.reduce((a,b)=>a+b.seconds,0);
+  const sessionSummaries=sessions.map(s=>{
+    const items=attempts.filter(a=>a.sessionId===s.id);
+    const best=items.length ? Math.max(...items.map(x=>Math.round(x.score/x.total*100))) : 0;
+    return {label:s.day, section:s.section, count:items.length, best:best};
+  });
+  statsWrap.innerHTML=`
+    <div class="stat"><div class="mini">Kabuuang Attempts</div><div class="big">${totalAttempts}</div></div>
+    <div class="stat"><div class="mini">Average Score</div><div class="big">${totalAttempts ? avgScore.toFixed(1) : '0.0'}%</div></div>
+    <div class="stat"><div class="mini">Kabuuang Oras</div><div class="big">${formatTime(totalSeconds)}</div></div>
+    ${sessionSummaries.map(s=>`
+      <div class="stat">
+        <div class="mini">${escapeHtml(s.label)} • ${escapeHtml(s.section)}</div>
+        <div class="big">${s.best}%</div>
+        <div class="mini">${s.count} attempt/s</div>
+      </div>
+    `).join('')}
+  `;
+  const tableWrap=document.getElementById('attemptTableWrap');
+  if(!attempts.length){
+    tableWrap.innerHTML=`<p class="mini">Wala pang naitatalang attempt. Simulan ang isang interactive practice mula sa itaas.</p>`;
+    return;
+  }
+  tableWrap.innerHTML=`
+    <table class="attempts">
+      <thead><tr><th>Petsa / Oras</th><th>Session</th><th>Iskor</th><th>Porsiyento</th><th>Oras</th></tr></thead>
+      <tbody>
+        ${attempts.map(a=>`
+          <tr>
+            <td>${new Date(a.timestamp).toLocaleString()}</td>
+            <td>${escapeHtml(a.day)} — ${escapeHtml(a.sessionTitle)}</td>
+            <td>${a.score} / ${a.total}</td>
+            <td>${Math.round((a.score/a.total)*100)}%</td>
+            <td>${formatTime(a.seconds)}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+document.getElementById('backBtn').addEventListener('click', backToSessions);
+renderSessions();
+renderDashboard();
+</script>
 </body>
 </html>
